@@ -1,54 +1,62 @@
 /* 
 Simple code highlighting CSS
+Monospaced with Roboto Mono for consistency
 You can replace this with more advanced highlighting libraries like PrismJS if needed
 */
 
 .language-javascript,
-.language-js {
-    color: #333;
+.language-js,
+.language-html,
+.language-xml,
+.language-css,
+.language-markdown {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #e0e0e0;
 }
 
 /* Keywords */
 .language-javascript .keyword,
 .language-js .keyword {
-    color: #0076c0;
+    color: #00bcd4; /* Cyan */
 }
 
 /* Strings */
 .language-javascript .string,
 .language-js .string {
-    color: #42b983;
+    color: #42b983; /* Vue Green */
 }
 
 /* Numbers */
 .language-javascript .number,
 .language-js .number {
-    color: #fd971f;
+    color: #fd971f; /* Orange */
 }
 
 /* Functions */
 .language-javascript .function,
 .language-js .function {
-    color: #dd4a68;
+    color: #ff4081; /* Pink */
 }
 
 /* Comments */
 .language-javascript .comment,
 .language-js .comment {
-    color: #999;
+    color: #999999;
     font-style: italic;
 }
 
 /* HTML/XML Elements */
 .language-html .tag,
 .language-xml .tag {
-    color: #0076c0;
+    color: #00bcd4;
 }
 
 /* HTML/XML Attribute Names */
 .language-html .attr-name,
 .language-xml .attr-name {
-    color: #dd4a68;
+    color: #ff4081;
 }
 
 /* HTML/XML Attribute Values */
@@ -59,7 +67,7 @@ You can replace this with more advanced highlighting libraries like PrismJS if n
 
 /* CSS Properties */
 .language-css .property {
-    color: #0076c0;
+    color: #00bcd4;
 }
 
 /* CSS Values */
@@ -69,12 +77,12 @@ You can replace this with more advanced highlighting libraries like PrismJS if n
 
 /* CSS Selectors */
 .language-css .selector {
-    color: #dd4a68;
+    color: #ff4081;
 }
 
 /* Markdown Headers */
 .language-markdown .heading {
-    color: #0076c0;
+    color: #00bcd4;
     font-weight: bold;
 }
 
