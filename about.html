@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me | My Blog</title>
+    <link rel="stylesheet" href="style/main.css">
+    <meta name="description" content="Learn more about the author of this blog">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><a href="index.html">My Blog</a></h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="page">
+            <header>
+                <h1>About Me</h1>
+            </header>
+            
+            <div class="page-content">
+                <!-- Optional: Add your profile picture -->
+                <!-- <img src="images/profile.jpg" alt="My Profile Picture" class="profile-image"> -->
+                
+                <p>Hello! My name is [Your Name]. I'm a [Your Profession/Interest] based in [Your Location].</p>
+                
+                <p>This blog is my personal space to share thoughts, experiences, and projects I'm working on. I created it using simple HTML and CSS and host it on GitHub Pages.</p>
+                
+                <h2>My Background</h2>
+                <p>I have experience in [Your Skills/Experience]. I'm passionate about [Your Interests/Hobbies].</p>
+                
+                <h2>Contact Me</h2>
+                <p>If you'd like to get in touch, you can reach me at:</p>
+                <ul class="contact-list">
+                    <li>Email: <a href="mailto:youremail@example.com">youremail@example.com</a></li>
+                    <li>GitHub: <a href="https://github.com/yourusername" target="_blank">@yourusername</a></li>
+                    <!-- Add other social links as needed -->
+                </ul>
+                
+                <h2>About This Blog</h2>
+                <p>This blog was created to [Your Purpose for the Blog]. I built it with a focus on simplicity and readability.</p>
+                
+                <p>Thanks for stopping by!</p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="current-year">2025</span> My Blog. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Update footer year automatically
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown to HTML Converter | My Blog</title>
+    <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" href="style/code-highlighting.css">
+    <style>
+        .converter-container {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .input-area, .output-area {
+            flex: 1;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 15px;
+        }
+        
+        .input-area {
+            background-color: #f9f9f9;
+        }
+        
+        .output-area {
+            background-color: white;
+        }
+        
+        textarea {
+            width: 100%;
+            height: 300px;
+            border: none;
+            background-color: transparent;
+            resize: vertical;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            padding: 0;
+        }
+        
+        textarea:focus {
+            outline: none;
+        }
+        
+        .preview {
+            height: 300px;
+            overflow-y: auto;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            justify-content: flex-end;
+        }
+        
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+        
+        button:hover {
+            background-color: var(--link-hover);
+        }
+        
+        .template-dropdown {
+            margin-bottom: 15px;
+        }
+        
+        .help-text {
+            font-size: 14px;
+            color: var(--light-text);
+            margin-top: 5px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><a href="index.html">My Blog</a></h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Markdown to HTML Converter</h1>
+        <p>Use this tool to convert your Markdown content to HTML for your blog posts.</p>
+        
+        <div class="template-dropdown">
+            <label for="template-select">Choose a template: </label>
+            <select id="template-select">
+                <option value="blank">Blank</option>
+                <option value="blog-post">Blog Post Template</option>
+                <option value="tutorial">Tutorial Template</option>
+            </select>
+        </div>
+        
+        <div class="converter-container">
+            <div class="input-area">
+                <h3>Markdown Input</h3>
+                <textarea id="markdown-input" placeholder="Type or paste your Markdown content here..."></textarea>
+            </div>
+            
+            <div class="output-area">
+                <h3>HTML Preview</h3>
+                <div class="preview" id="html-preview"></div>
+            </div>
+        </div>
+        
+        <div class="buttons">
+            <button id="generate-html">Generate HTML</button>
+            <button id="copy-html">Copy HTML to Clipboard</button>
+            <button id="download-html">Download HTML File</button>
+        </div>
+        
+        <div class="hidden" id="file-info">
+            <h3>Save as HTML File</h3>
+            <div>
+                <label for="post-title">Post Title:</label>
+                <input type="text" id="post-title" placeholder="My Blog Post Title">
+            </div>
+            <div>
+                <label for="post-date">Post Date:</label>
+                <input type="date" id="post-date">
+            </div>
+            <div>
+                <label for="post-description">Post Description:</label>
+                <input type="text" id="post-description" placeholder="A brief description of your post">
+            </div>
+            <div class="buttons">
+                <button id="save-file">Save HTML File</button>
+            </div>
+            <p class="help-text">This will create a complete HTML file with your blog post content, ready to add to your blog.</p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="current-year">2025</span> My Blog. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/markdown-converter.js"></script>
+    <script>
+        // Initialize date input to current date
+        document.getElementById('post-date').valueAsDate = new Date();
+        
+        // Update footer year automatically
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Initialize converter
+        const converter = new MarkdownConverter();
+        
+        // Get DOM elements
+        const markdownInput = document.getElementById('markdown-input');
+        const htmlPreview = document.getElementById('html-preview');
+        const generateBtn = document.getElementById('generate-html');
+        const copyBtn = document.getElementById('copy-html');
+        const downloadBtn = document.getElementById('download-html');
+        const fileInfo = document.getElementById('file-info');
+        const saveFileBtn = document.getElementById('save-file');
+        const templateSelect = document.getElementById('template-select');
+        
+        // Templates
+        const templates = {
+            blank: "",
+            'blog-post': `# My Blog Post Title\n\nPublished on ${new Date().toLocaleDateString()}\n\nIntroduction paragraph goes here. This is where you can introduce your topic and give a brief overview of what the post will cover.\n\n## First Section\n\nThis is the first section of your blog post. You can write about whatever you want here.\n\n* Point 1\n* Point 2\n* Point 3\n\n## Second Section\n\nThis is the second section of your blog post. You can include code examples:\n\n\`\`\`javascript\nfunction hello() {\n    console.log("Hello, world!");\n}\n\`\`\`\n\n## Conclusion\n\nSummarize your post here and provide any final thoughts or calls to action.`,
+            tutorial: `# How To: Tutorial Title\n\nPublished on ${new Date().toLocaleDateString()}\n\n## Introduction\n\nExplain what this tutorial will teach and why it's useful.\n\n## Prerequisites\n\n* Requirement 1\n* Requirement 2\n* Requirement 3\n\n## Step 1: Getting Started\n\nInstructions for the first step...\n\n## Step 2: Main Process\n\nInstructions for the second step...\n\n\`\`\`\nExample code or command\n\`\`\`\n\n## Step 3: Finishing Up\n\nInstructions for the final step...\n\n## Troubleshooting\n\nCommon issues and their solutions:\n\n1. Problem 1: Solution to problem 1\n2. Problem 2: Solution to problem 2\n\n## Conclusion\n\nSummarize what was learned and suggest next steps.`
+        };
+        
+        // Set template when dropdown changes
+        templateSelect.addEventListener('change', () => {
+            markdownInput.value = templates[templateSelect.value];
+            updatePreview();
+        });
+        
+        // Function to update the HTML preview
+        function updatePreview() {
+            const markdown = markdownInput.value;
+            const html = converter.convertToHtml(markdown);
+            htmlPreview.innerHTML = html;
+        }
+        
+        // Generate HTML button
+        generateBtn.addEventListener('click', updatePreview);
+        
+        // Copy HTML to clipboard button
+        copyBtn.addEventListener('click', () => {
+            const markdown = markdownInput.value;
+            const html = converter.convertToHtml(markdown);
+            
+            navigator.clipboard.writeText(html)
+                .then(() => {
+                    alert('HTML copied to clipboard!');
+                })
+                .catch(err => {
+                    console.error('Failed to copy: ', err);
+                    alert('Failed to copy HTML. Please try again.');
+                });
+        });
+        
+        // Download HTML button
+        downloadBtn.addEventListener('click', () => {
+            fileInfo.classList.remove('hidden');
+        });
+        
+        // Save HTML file button
+        saveFileBtn.addEventListener('click', () => {
+            const title = document.getElementById('post-title').value || 'Blog Post';
+            const date = document.getElementById('post-date').value;
+            const description = document.getElementById('post-description').value || 'A blog post';
+            
+            // Format date for filename (YYYY-MM-DD)
+            const fileDate = date.replace(/\//g, '-');
+            
+            // Create slug from title
+            const slug = title.toLowerCase()
+                .replace(/[^\w\s]/gi, '')  // Remove special characters
+                .replace(/\s+/g, '-');     // Replace spaces with hyphens
+            
+            const filename = `${fileDate}-${slug}.html`;
+            
+            // Get HTML content
+            const postContent = converter.convertToHtml(markdownInput.value);
+            
+            // Create a complete HTML file
+            const htmlTemplate = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${title} | My Blog</title>
+    <link rel="stylesheet" href="../style/main.css">
+    <link rel="stylesheet" href="../style/code-highlighting.css">
+    <meta name="description" content="${description}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><a href="../index.html">My Blog</a></h1>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <header class="post-header">
+                <h1>${title}</h1>
+                <div class="post-meta">
+                    <time datetime="${date}">${new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+                </div>
+            </header>
+
+            <div class="post-content">
+                ${postContent}
+            </div>
+        </article>
+        
+        <div class="post-navigation">
+            <a href="../index.html">← Back to Posts</a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="current-year">2025</span> My Blog. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Update footer year automatically
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>`;
+            
+            // Create file download
+            const blob = new Blob([htmlTemplate], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            
+            // Clean up
+            setTimeout(() => {
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                fileInfo.classList.add('hidden');
+            }, 0);
+        });
+        
+        // Initial preview update
+        updatePreview();
+    </script>
+</body>
+</html>

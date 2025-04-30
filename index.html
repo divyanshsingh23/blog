@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Personal Blog</title>
+    <link rel="stylesheet" href="style/main.css">
+    <meta name="description" content="A personal blog about my thoughts and experiences">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><a href="index.html">My Blog</a></h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="posts">
+            <h2>Recent Posts</h2>
+            
+            <article class="post-card">
+                <h3><a href="posts/2025-04-30-hello-world.html">Hello World: My First Blog Post</a></h3>
+                <div class="post-meta">
+                    <time datetime="2025-04-30">April 30, 2025</time>
+                </div>
+                <p>An introduction to my new blog and what I plan to write about in the future.</p>
+                <a href="posts/2025-04-30-hello-world.html" class="read-more">Read More →</a>
+            </article>
+
+            <article class="post-card">
+                <h3><a href="posts/2025-04-29-welcome-post.html">Welcome to My Blog</a></h3>
+                <div class="post-meta">
+                    <time datetime="2025-04-29">April 29, 2025</time>
+                </div>
+                <p>Why I decided to start a blog and my goals for this space.</p>
+                <a href="posts/2025-04-29-welcome-post.html" class="read-more">Read More →</a>
+            </article>
+            
+            <!-- Add new blog post cards here as you create them -->
+            
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="current-year">2025</span> My Blog. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Update footer year automatically
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

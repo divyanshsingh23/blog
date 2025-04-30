@@ -1,0 +1,94 @@
+/* 
+Simple code highlighting CSS
+You can replace this with more advanced highlighting libraries like PrismJS if needed
+*/
+
+.language-javascript,
+.language-js {
+    color: #333;
+}
+
+/* Keywords */
+.language-javascript .keyword,
+.language-js .keyword {
+    color: #0076c0;
+}
+
+/* Strings */
+.language-javascript .string,
+.language-js .string {
+    color: #42b983;
+}
+
+/* Numbers */
+.language-javascript .number,
+.language-js .number {
+    color: #fd971f;
+}
+
+/* Functions */
+.language-javascript .function,
+.language-js .function {
+    color: #dd4a68;
+}
+
+/* Comments */
+.language-javascript .comment,
+.language-js .comment {
+    color: #999;
+    font-style: italic;
+}
+
+/* HTML/XML Elements */
+.language-html .tag,
+.language-xml .tag {
+    color: #0076c0;
+}
+
+/* HTML/XML Attribute Names */
+.language-html .attr-name,
+.language-xml .attr-name {
+    color: #dd4a68;
+}
+
+/* HTML/XML Attribute Values */
+.language-html .attr-value,
+.language-xml .attr-value {
+    color: #42b983;
+}
+
+/* CSS Properties */
+.language-css .property {
+    color: #0076c0;
+}
+
+/* CSS Values */
+.language-css .value {
+    color: #fd971f;
+}
+
+/* CSS Selectors */
+.language-css .selector {
+    color: #dd4a68;
+}
+
+/* Markdown Headers */
+.language-markdown .heading {
+    color: #0076c0;
+    font-weight: bold;
+}
+
+/* Markdown Bold */
+.language-markdown .strong {
+    font-weight: bold;
+}
+
+/* Markdown Italic */
+.language-markdown .italic {
+    font-style: italic;
+}
+
+/* Markdown Links */
+.language-markdown .link {
+    color: #42b983;
+}
